@@ -9,8 +9,11 @@ import {
   Zap,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
   const stats = [
     { number: "10,000+", label: "Happy Customers", icon: Users },
     { number: "5,000+", label: "Vehicles Rented", icon: Car },
@@ -52,7 +55,7 @@ const AboutUs = () => {
       image:
         "https://imgs.search.brave.com/AzC7QUcHJ87_u8zgkbs4HOK0qzsf1L-7UPaBvFBaBRw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTIv/MTg5LzI2Ni9zbWFs/bC91c2VyLW1hbi1h/Y2NvdW50LXBlcnNv/bi1wZW9wbGUtaGFs/Zi1ib2R5LWhlYWQt/c3RpY2ttYW4tc3Rp/Y2stZmlndXJlLXBy/b2ZpbGUtc2lsaG91/ZXR0ZS1uZXR3b3Jr/LWNvbnRhY3QtYmxh/Y2std2hpdGUtc2ln/bi1pY29uLXNoYXBl/LW91dGxpbmUtdmVj/dG9yLmpwZw",
       description:
-        "Passionate about revolutionizing the car renting experience with 8+ years in automotive industry.",
+        "Devoted to crafting personalized solutions that turn customers into lifelong advocates.",
     },
     {
       name: "Kelvin Akproko",
@@ -76,7 +79,7 @@ const AboutUs = () => {
       image:
         "https://imgs.search.brave.com/AzC7QUcHJ87_u8zgkbs4HOK0qzsf1L-7UPaBvFBaBRw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTIv/MTg5LzI2Ni9zbWFs/bC91c2VyLW1hbi1h/Y2NvdW50LXBlcnNv/bi1wZW9wbGUtaGFs/Zi1ib2R5LWhlYWQt/c3RpY2ttYW4tc3Rp/Y2stZmlndXJlLXBy/b2ZpbGUtc2lsaG91/ZXR0ZS1uZXR3b3Jr/LWNvbnRhY3QtYmxh/Y2std2hpdGUtc2ln/bi1pY29uLXNoYXBl/LW91dGxpbmUtdmVj/dG9yLmpwZw",
       description:
-        "Dedicated to ensuring exceptional customer service and building long-term relationships.",
+        "Committed to transforming every interaction into a meaningful connection that creates lasting value.",
     },
     {
       name: "Oreoluwa Alaba",
@@ -84,9 +87,17 @@ const AboutUs = () => {
       image:
         "https://imgs.search.brave.com/AzC7QUcHJ87_u8zgkbs4HOK0qzsf1L-7UPaBvFBaBRw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNTIv/MTg5LzI2Ni9zbWFs/bC91c2VyLW1hbi1h/Y2NvdW50LXBlcnNv/bi1wZW9wbGUtaGFs/Zi1ib2R5LWhlYWQt/c3RpY2ttYW4tc3Rp/Y2stZmlndXJlLXBy/b2ZpbGUtc2lsaG91/ZXR0ZS1uZXR3b3Jr/LWNvbnRhY3QtYmxh/Y2std2hpdGUtc2ln/bi1pY29uLXNoYXBl/LW91dGxpbmUtdmVj/dG9yLmpwZw",
       description:
-        "Dedicated to ensuring exceptional customer service and building long-term relationships.",
+        "Passionate about delivering experiences that exceed expectations and foster unwavering trust.",
     },
   ];
+
+  const navigateToProducts = () => {
+    navigate("/cars");
+  };
+
+  const navigateToContactUs = () => {
+    navigate("/contact");
+  };
 
   return (
     <section className="min-h-screen bg-gray-50 w-full">
@@ -250,10 +261,16 @@ const AboutUs = () => {
             difference of working with a trusted partner.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
+            <button
+              onClick={navigateToProducts}
+              className="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
+            >
               View Our Inventory
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-200">
+            <button
+              onClick={navigateToContactUs}
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-200"
+            >
               Contact Us Today
             </button>
           </div>

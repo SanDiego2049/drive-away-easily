@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { Search, Filter, ChevronDown, Star, StarOff } from "lucide-react";
+import { Search, Filter, ChevronDown, Star } from "lucide-react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import backgroundImage2 from "../assets/backgroundImage2.jpg";
@@ -140,16 +140,19 @@ const AllCarsDisplay = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-gray-400" />
+            <div className="relative flex-1 sm:max-w-md">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-20">
+                <Search className="h-5 w-5 text-gray-900" />
               </div>
               <input
-                type="text"
+                id="vehicle-search"
+                name="vehicleSearch"
+                type="search"
                 placeholder="Search by make or model..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 relative z-10"
+                autoComplete="off"
               />
             </div>
 
@@ -165,7 +168,7 @@ const AllCarsDisplay = () => {
               </button>
 
               {/* Desktop Filters */}
-              <div className="hidden lg:flex items-center gap-4">
+              <div className="hidden lg:flex items-center gap-4  z-15">
                 {/* Category Filter */}
                 <select
                   value={selectedCategory}
@@ -192,7 +195,7 @@ const AllCarsDisplay = () => {
               </div>
 
               {/* Sort Dropdown */}
-              <div className="relative">
+              <div className="relative z-15">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
@@ -300,7 +303,7 @@ const AllCarsDisplay = () => {
                   </div>
                   <button
                     onClick={() => handleBookNow(vehicle.id)}
-                    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                   >
                     Book Now
                   </button>

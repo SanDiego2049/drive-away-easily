@@ -88,7 +88,7 @@ const Booking = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <button
             onClick={handleBackToVehicles}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
+            className="cursor-pointer flex items-center text-gray-600 hover:text-gray-800 mb-4"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
             Back to vehicles

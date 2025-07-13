@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import AllCarsDisplay from "./pages/AllCarsDisplay";
 import Booking from "./pages/Booking";
 import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/cars" element={<AllCarsDisplay />} />
       <Route path="/booking" element={<Booking />} />
       <Route path="/about" element={<AboutUs />} />
+      <Route path="/contact" element={<ContactUs />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

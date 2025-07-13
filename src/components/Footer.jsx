@@ -7,8 +7,11 @@ import {
   MapPin,
 } from "lucide-react";
 import backgroundImage from "../assets/backgroundImage.jpg";
+import { useNavigate } from "react-router";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   const quickLinks = [
     { name: "About Us", href: "#" },
     { name: "Terms & Conditions", href: "#" },
@@ -21,6 +24,10 @@ const Footer = () => {
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Instagram, href: "#", label: "Instagram" },
   ];
+
+  const navigateToProducts = () => {
+    navigate("/cars");
+  };
 
   return (
     <footer className="relative">
@@ -45,7 +52,10 @@ const Footer = () => {
             Join thousands of happy customers who trust us for their travel
             needs.
           </p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200 text-lg">
+          <button
+            onClick={navigateToProducts}
+            className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200 text-lg"
+          >
             Start Your Booking
           </button>
         </div>
@@ -105,7 +115,7 @@ const Footer = () => {
               </div>
 
               {/* Stay Connected */}
-              <div>
+              <div className="overflow-x-hidden lg:col-span-1">
                 <h4 className="text-lg font-semibold text-white mb-4">
                   Stay Connected
                 </h4>
@@ -121,13 +131,13 @@ const Footer = () => {
                     </a>
                   ))}
                 </div>
-                <div className="flex">
+                <div className="flex min-w-0">
                   <input
                     type="email"
                     placeholder="Your email"
-                    className="flex-1 px-3 py-2 bg-gray-700 text-white placeholder-gray-400 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                    className="flex-1 min-w-0 px-3 py-2 bg-gray-700 text-white placeholder-gray-400 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
                   />
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-r-lg transition-colors duration-200 text-sm font-medium">
+                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-3 lg:px-4 py-2 rounded-r-lg transition-colors duration-200 text-sm font-medium whitespace-nowrap flex-shrink-0">
                     Subscribe
                   </button>
                 </div>

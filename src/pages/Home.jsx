@@ -8,7 +8,7 @@ import WhyUs from "../components/WhyUs";
 
 const Home = () => {
   return (
-    <main>
+    <main className="w-full">
       <Hero />
       <HowItWorks />
       <CardsDisplay />

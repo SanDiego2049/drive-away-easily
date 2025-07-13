@@ -61,7 +61,7 @@ const HeroSection = () => {
             <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 {/* Vehicle Type Dropdown */}
-                <div className="relative">
+                <div className="relative z-40">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Vehicle Type
                   </label>
@@ -87,7 +87,7 @@ const HeroSection = () => {
                     </button>
 
                     {isVehicleDropdownOpen && (
-                      <div className="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                      <div className="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto z-40">
                         {vehicleTypes.map((vehicle) => (
                           <button
                             key={vehicle}
@@ -95,7 +95,7 @@ const HeroSection = () => {
                               setSelectedVehicle(vehicle);
                               setIsVehicleDropdownOpen(false);
                             }}
-                            className="w-full cursor-pointer z-20 text-left px-4 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
+                            className="w-full cursor-pointer text-left px-4 py-2 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg"
                           >
                             {vehicle}
                           </button>
