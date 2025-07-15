@@ -10,6 +10,7 @@ import {
   User,
   LogOut,
   Settings,
+  UserCircle,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
 
@@ -93,8 +94,8 @@ const Sidebar = () => {
 
           {/* Top navigation */}
           <div>
-            <div className="w-14 h-14 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-xl mb-6 shadow hover:scale-105 transition">
-              <User className="w-6 h-6" />
+            <div className="w-14 h-14 rounded-full border-2 border-orange-500 flex items-center justify-center text-orange-500 font-bold text-xl mb-6 shadow hover:scale-105 transition">
+              <UserCircle />
             </div>
             <nav className="space-y-4">
               {navLinks.map(({ to, label, icon }) => (

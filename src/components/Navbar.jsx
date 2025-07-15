@@ -70,7 +70,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <button
                 onClick={navigateToDashboard}
-                className="w-10 h-10 rounded-full bg-orange-100 hover:bg-orange-200 flex items-center justify-center transition"
+                className="w-10 h-10 rounded-full border-2 border-orange-500 hover:bg-orange-100 flex items-center justify-center transition"
               >
                 <UserCircle className="w-6 h-6 text-orange-600" />
               </button>
