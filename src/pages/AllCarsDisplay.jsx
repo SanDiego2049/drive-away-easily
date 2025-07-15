@@ -1,9 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useContext } from "react";
 import { Search, Filter, ChevronDown, Star } from "lucide-react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import backgroundImage2 from "../assets/backgroundImage2.jpg";
 import { vehicles } from "../data/VehicleList";
+import { UserContext } from "../components/contexts/UserContext";
 import SmallerFooter from "../components/SmallerFooter";
 
 const AllCarsDisplay = () => {
@@ -11,8 +12,8 @@ const AllCarsDisplay = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Mock user authentication state - you can replace this with your actual auth logic
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useContext(UserContext);
+  const isLoggedIn = !!user; // true if a user object exists
 
   // State for search, filters, and sorting
   const [searchTerm, setSearchTerm] = useState("");

@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router";
+import {
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  ArrowRight,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from "../components/contexts/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,9 +18,13 @@ const Login = () => {
     password: "",
     rememberMe: false,
   });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { setUser } = useUser();
 
-  // Placeholder for useNavigate - you can uncomment this when using with React Router
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectPath = location.state?.from || "/";
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -21,29 +34,53 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login submitted:", formData);
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        "https://roadsphere.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email.trim(),
+            password: formData.password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("auth_token", data.token || "dummy-token");
+        localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user); // pass the full user data including role and KYC status
+        navigate(redirectPath, { replace: true });
+      } else {
+        setError(data.message || "Login failed. Please try again.");
+      }
+    } catch (err) {
+      setError(err.message || "Unexpected error. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const navigateToSignup = () => {
-    // Placeholder for navigation - replace with actual navigation logic
-    console.log("Navigate to signup");
-    navigate("/signup");
-  };
-
-  const navigateToForgotPassword = () => {
-    console.log("Navigate to signup");
-    navigate("/password-reset");
-  };
+  const navigateToSignup = () =>
+    navigate("/signup", { state: { from: location.pathname } });
+  const navigateToForgotPassword = () =>
+    navigate("/password-reset", { state: { from: location.pathname } });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-          {/* Header */}
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="w-8 h-8 text-white" />
@@ -54,9 +91,7 @@ const Login = () => {
             <p className="text-gray-600">Sign in to your account to continue</p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
@@ -74,14 +109,13 @@ const Login = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50 focus:bg-white"
                   placeholder="Enter your email"
                   required
                 />
               </div>
             </div>
 
-            {/* Password Field */}
             <div>
               <label
                 htmlFor="password"
@@ -99,14 +133,14 @@ const Login = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-gray-50 focus:bg-white"
                   placeholder="Enter your password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -117,7 +151,13 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
+            {error && (
+              <div className="flex items-center text-sm text-red-600 gap-2">
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </div>
+            )}
+
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -126,7 +166,7 @@ const Login = () => {
                   name="rememberMe"
                   checked={formData.rememberMe}
                   onChange={handleInputChange}
-                  className="h-4 w-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-orange-500 border-gray-300 rounded"
                 />
                 <label
                   htmlFor="rememberMe"
@@ -135,21 +175,28 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-              <a
+              <button
                 onClick={navigateToForgotPassword}
-                className="text-sm text-orange-500 hover:text-orange-600 transition-colors duration-200"
+                type="button"
+                className="text-sm text-orange-500 hover:text-orange-600"
               >
                 Forgot password?
-              </a>
+              </button>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center group"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center group"
+              disabled={isLoading}
             >
-              <span className="mr-2">Sign In</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+              {isLoading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <span className="mr-2">Sign In</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+                </>
+              )}
             </button>
           </form>
 
@@ -169,7 +216,11 @@ const Login = () => {
 
           {/* Social Login */}
           <div className="grid grid-cols-2 gap-3">
-            <button className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <button
+              type="button"
+              disabled={isLoading}
+              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+            >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -190,7 +241,11 @@ const Login = () => {
               </svg>
               <span className="text-sm font-medium text-gray-700">Google</span>
             </button>
-            <button className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+            <button
+              type="button"
+              disabled={isLoading}
+              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+            >
               <svg className="w-5 h-5 mr-2" fill="#1877F2" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
@@ -200,14 +255,12 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Sign Up Link */}
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
               <button
-                type="button"
                 onClick={navigateToSignup}
-                className="text-orange-500 cursor-pointer hover:text-orange-600 font-medium transition-colors duration-200 underline"
+                className="text-orange-500 hover:text-orange-600 font-medium underline"
               >
                 Sign up now
               </button>
@@ -215,21 +268,14 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Additional Info */}
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
             By signing in, you agree to our{" "}
-            <a
-              href="#"
-              className="text-orange-500 hover:text-orange-600 transition-colors duration-200"
-            >
+            <a href="#" className="text-orange-500 hover:text-orange-600">
               Terms of Service
             </a>{" "}
             and{" "}
-            <a
-              href="#"
-              className="text-orange-500 hover:text-orange-600 transition-colors duration-200"
-            >
+            <a href="#" className="text-orange-500 hover:text-orange-600">
               Privacy Policy
             </a>
           </p>

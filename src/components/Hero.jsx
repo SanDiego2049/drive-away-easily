@@ -8,59 +8,95 @@ const HeroSection = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [isVehicleDropdownOpen, setIsVehicleDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const vehicleTypes = ["Sedan", "SUV", "Luxury", "Bus"];
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!selectedVehicle || !startDate || !endDate) {
       alert("Please fill in all fields before searching");
       return;
     }
 
-    // Add your search logic here
-    console.log("Search data:", {
-      vehicle: selectedVehicle,
-      startDate,
-      endDate,
-    });
+    setLoading(true);
 
-    alert(`Searching for ${selectedVehicle} from ${startDate} to ${endDate}`);
+    try {
+      // Fetch rental details for vehicle
+      // We'll try to match vehicle by name to an ID or send a simple GET /rentals/1 for demo
+      // In real, you'd map vehicle type to rental id or search
+
+      // For example purpose, let's assume:
+      // Sedan -> id 1, SUV -> id 2, Luxury -> id 3, Bus -> id 4
+      const vehicleIdMap = {
+        Sedan: 1,
+        SUV: 2,
+        Luxury: 3,
+        Bus: 4,
+      };
+
+      const vehicleId = vehicleIdMap[selectedVehicle];
+
+      if (!vehicleId) {
+        alert("Selected vehicle not found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch(
+        `https://roadsphere.vercel.app/api/rentals/${vehicleId}`,
+        {
+          headers: {
+            accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch vehicle details");
+      }
+
+      const data = await response.json();
+
+      // You can handle the data as needed
+      console.log("Vehicle details:", data);
+
+      alert(
+        `Searching for ${selectedVehicle} from ${startDate} to ${endDate}.\n\nVehicle Details:\n${JSON.stringify(
+          data,
+          null,
+          2
+        )}`
+      );
+    } catch (error) {
+      alert(error.message || "An error occurred during search");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
       <img
         src={backgroundImage}
         alt="Mountain road with car"
         className="absolute inset-0 w-full h-full object-cover"
       />
-
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
-
-      {/* Content */}
       <div className="relative min-h-screen flex flex-col">
-        {/* Navbar */}
         <Navbar />
 
-        {/* Hero Content */}
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Main Heading */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Rent Smarter, Travel Freer
             </h1>
 
-            {/* Subheading */}
             <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Easily rent cars for your next trip or event – anytime, anywhere.
             </p>
 
-            {/* Search Form */}
             <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-                {/* Vehicle Type Dropdown */}
                 <div className="relative z-40">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Vehicle Type
@@ -105,45 +141,39 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                {/* Start Date */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Start Date
                   </label>
-                  <div className="relative">
-                    <input
-                      type="date"
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      min={new Date().toISOString().split("T")[0]}
-                    />
-                  </div>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none"
+                    min={new Date().toISOString().split("T")[0]}
+                  />
                 </div>
 
-                {/* End Date */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     End Date
                   </label>
-                  <div className="relative">
-                    <input
-                      type="date"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                      min={startDate || new Date().toISOString().split("T")[0]}
-                    />
-                  </div>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent appearance-none"
+                    min={startDate || new Date().toISOString().split("T")[0]}
+                  />
                 </div>
 
-                {/* Search Button */}
                 <div>
                   <button
                     onClick={handleSearch}
+                    disabled={loading}
                     className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md h-12 flex items-center justify-center"
                   >
-                    Search
+                    {loading ? "Searching..." : "Search"}
                   </button>
                 </div>
               </div>

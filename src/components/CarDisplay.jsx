@@ -5,7 +5,7 @@ import carImage3 from "../assets/carImage3.jpg";
 import carImage4 from "../assets/carImage4.jpg";
 import { useNavigate } from "react-router";
 
-const CardsDisplay = () => {
+const CarsDisplay = () => {
   const navigate = useNavigate();
 
   const navigateToProducts = () => {
@@ -110,4 +110,4 @@ const CardsDisplay = () => {
   );
 };
 
-export default CardsDisplay;
+export default CarsDisplay;

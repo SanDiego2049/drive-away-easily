@@ -44,13 +44,24 @@ const ForgotPassword = () => {
     }
 
     try {
-      // Simulate API call to send OTP
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setCurrentStep("otp");
-      setOtpTimer(300); // 5 minutes
-      console.log("OTP sent to:", email);
+      const res = await fetch(
+        "https://roadsphere.vercel.app/api/auth/send-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            assigned_for: "email verification",
+          }),
+        }
+      );
 
-      // Start countdown timer
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Failed to send OTP");
+
+      setCurrentStep("otp");
+      setOtpTimer(300);
       const timer = setInterval(() => {
         setOtpTimer((prev) => {
           if (prev <= 1) {
@@ -61,7 +72,7 @@ const ForgotPassword = () => {
         });
       }, 1000);
     } catch (err) {
-      setError("Failed to send OTP. Please try again.");
+      setError(err.message || "Failed to send OTP.");
     } finally {
       setIsLoading(false);
     }
@@ -80,17 +91,23 @@ const ForgotPassword = () => {
     }
 
     try {
-      // Simulate API call to verify OTP
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const res = await fetch(
+        "https://roadsphere.vercel.app/api/auth/verify-reset-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, otp_code: otp }),
+        }
+      );
 
-      // For demo purposes, accept "123456" as valid OTP
-      if (otp === "123456") {
-        setCurrentStep("password");
-      } else {
-        setError("Invalid OTP. Please try again.");
-      }
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "OTP verification failed");
+
+      setOtpToken(data.otp_token);
+      setCurrentStep("password");
     } catch (err) {
-      setError("Failed to verify OTP. Please try again.");
+      setError(err.message || "Failed to verify OTP");
     } finally {
       setIsLoading(false);
     }
@@ -116,12 +133,25 @@ const ForgotPassword = () => {
     }
 
     try {
-      // Simulate API call to reset password
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const res = await fetch(
+        "https://roadsphere.vercel.app/api/auth/reset-password",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            password: newPassword,
+            otp_token: otpToken,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Failed to reset password");
+
       setCurrentStep("success");
-      console.log("Password reset successful for:", email);
     } catch (err) {
-      setError("Failed to reset password. Please try again.");
+      setError(err.message || "Reset failed.");
     } finally {
       setIsLoading(false);
     }
@@ -134,12 +164,21 @@ const ForgotPassword = () => {
     setOtp("");
 
     try {
-      // Simulate API call to resend OTP
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setOtpTimer(300); // Reset timer
-      console.log("OTP resent to:", email);
+      const res = await fetch(
+        "https://roadsphere.vercel.app/api/auth/send-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, assigned_for: "email verification" }),
+        }
+      );
 
-      // Start countdown timer
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || "Failed to resend OTP");
+      }
+
+      setOtpTimer(300);
       const timer = setInterval(() => {
         setOtpTimer((prev) => {
           if (prev <= 1) {
@@ -150,7 +189,7 @@ const ForgotPassword = () => {
         });
       }, 1000);
     } catch (err) {
-      setError("Failed to resend OTP. Please try again.");
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
