@@ -6,6 +6,7 @@ import backgroundImage2 from "../assets/backgroundImage2.jpg";
 import { vehicles } from "../data/VehicleList";
 import { UserContext } from "../components/contexts/UserContext";
 import SmallerFooter from "../components/SmallerFooter";
+import BackToTop from "../components/BackToTop";
 
 const AllCarsDisplay = () => {
   // React Router hooks
@@ -328,6 +329,7 @@ const AllCarsDisplay = () => {
         )}
       </div>
 
+      <BackToTop />
       <SmallerFooter />
     </div>
   );

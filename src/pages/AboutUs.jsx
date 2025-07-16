@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router";
+import BackToTop from "../components/BackToTop";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -276,6 +277,7 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+      <BackToTop />
     </section>
   );
 };

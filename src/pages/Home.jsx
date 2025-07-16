@@ -1,3 +1,4 @@
+import BackToTop from "../components/BackToTop";
 import CardsDisplay from "../components/CarDisplay";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
@@ -15,6 +16,7 @@ const Home = () => {
       <WhyUs />
       <Reviews />
       <FAQ />
+      <BackToTop />
       <Footer />
     </main>
   );
