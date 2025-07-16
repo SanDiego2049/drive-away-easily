@@ -31,7 +31,6 @@ const ManageBookings = () => {
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
-    // Replace with API call later
     setBookings(dummyBookings);
   }, []);
 
@@ -46,15 +45,15 @@ const ManageBookings = () => {
     filter === "All" ? bookings : bookings.filter((b) => b.status === filter);
 
   return (
-    <div>
+    <div className="px-4 sm:px-0">
       <h2 className="text-2xl sm:text-3xl mb-4">Manage Bookings</h2>
 
-      <div className="flex items-center gap-4 mb-6">
+      <div className="flex flex-wrap gap-2 mb-6 justify-center sm:justify-start">
         {["All", "Pending", "Confirmed", "Cancelled"].map((status) => (
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`px-4 py-2 rounded-md border ${
+            className={`px-4 py-2 rounded-md border text-sm ${
               filter === status
                 ? "bg-orange-500 text-white"
                 : "bg-white text-gray-700 hover:bg-gray-100"
@@ -65,47 +64,53 @@ const ManageBookings = () => {
         ))}
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full text-sm text-left bg-white border rounded-md">
-          <thead className="bg-gray-100 border-b">
+      <div className="overflow-x-auto rounded-md border">
+        <table className="min-w-full text-sm text-left bg-white">
+          <thead className="bg-gray-100 border-b text-gray-700">
             <tr>
-              <th className="px-4 py-2">User</th>
-              <th className="px-4 py-2">Car</th>
-              <th className="px-4 py-2">Date</th>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2 text-center">Actions</th>
+              <th className="px-4 py-2 whitespace-nowrap">User</th>
+              <th className="px-4 py-2 whitespace-nowrap">Car</th>
+              <th className="px-4 py-2 whitespace-nowrap">Date</th>
+              <th className="px-4 py-2 whitespace-nowrap">Status</th>
+              <th className="px-4 py-2 text-center whitespace-nowrap">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {filteredBookings.map((booking) => (
               <tr key={booking.id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-2">{booking.user}</td>
-                <td className="px-4 py-2">{booking.car}</td>
-                <td className="px-4 py-2">{booking.date}</td>
-                <td className="px-4 py-2">{booking.status}</td>
-                <td className="px-4 py-2 flex justify-center gap-2">
-                  <button
-                    onClick={() => toast("Viewing booking details")}
-                    className="text-blue-500 hover:text-blue-700"
-                  >
-                    <Eye size={18} />
-                  </button>
-                  {booking.status !== "Cancelled" && (
+                <td className="px-4 py-2 whitespace-nowrap">{booking.user}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{booking.car}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{booking.date}</td>
+                <td className="px-4 py-2 whitespace-nowrap">
+                  {booking.status}
+                </td>
+                <td className="px-4 py-2">
+                  <div className="flex flex-wrap justify-center gap-2">
                     <button
-                      onClick={() => handleAction(booking.id, "Cancelled")}
-                      className="text-red-500 hover:text-red-700"
+                      onClick={() => toast("Viewing booking details")}
+                      className="text-blue-500 hover:text-blue-700"
                     >
-                      <Ban size={18} />
+                      <Eye size={18} />
                     </button>
-                  )}
-                  {booking.status === "Pending" && (
-                    <button
-                      onClick={() => handleAction(booking.id, "Confirmed")}
-                      className="text-green-600 hover:text-green-800"
-                    >
-                      <CheckCircle size={18} />
-                    </button>
-                  )}
+                    {booking.status !== "Cancelled" && (
+                      <button
+                        onClick={() => handleAction(booking.id, "Cancelled")}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <Ban size={18} />
+                      </button>
+                    )}
+                    {booking.status === "Pending" && (
+                      <button
+                        onClick={() => handleAction(booking.id, "Confirmed")}
+                        className="text-green-600 hover:text-green-800"
+                      >
+                        <CheckCircle size={18} />
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}

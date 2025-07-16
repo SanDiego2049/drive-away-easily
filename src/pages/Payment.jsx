@@ -75,9 +75,7 @@ const Payment = () => {
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-gray-50">
       {!paid ? (
         <div className="bg-white p-6 sm:p-8 rounded shadow-md max-w-md w-full text-center">
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            Complete Payment
-          </h2>
+          <h2 className="text-2xl sm:text-3xl mb-4">Complete Payment</h2>
           <p className="mb-6 text-base sm:text-lg">
             Vehicle: <strong>{bookingDetails.name}</strong>
           </p>
@@ -96,22 +94,20 @@ const Payment = () => {
             alt="Successful payment"
             className="mx-auto mb-6 w-24 h-24 sm:w-32 sm:h-32"
           />
-          <h2 className="text-2xl sm:text-3xl mb-4">
-            Payment Successful!
-          </h2>
+          <h2 className="text-2xl sm:text-3xl mb-4">Payment Successful!</h2>
           <p className="mb-6 text-base sm:text-lg">
             Thank you for your payment.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button
               onClick={generateReceipt}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded font-medium transition-colors"
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-medium transition-colors"
             >
               Download Receipt
             </button>
             <button
               onClick={() => navigate("/")}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded font-medium transition-colors"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-lg font-medium transition-colors"
             >
               Go to Homepage
             </button>

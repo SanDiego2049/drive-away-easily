@@ -483,7 +483,7 @@ const Signup = ({ userRole = "user" }) => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  className="absolute cursor-pointer inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
                   disabled={isLoading}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
@@ -522,7 +522,7 @@ const Signup = ({ userRole = "user" }) => {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 pr-3 flex cursor-pointer items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
                   disabled={isLoading}
                   aria-label={
                     showConfirmPassword
@@ -576,7 +576,7 @@ const Signup = ({ userRole = "user" }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed flex items-center justify-center group"
+              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white py-3 cursor-pointer px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed flex items-center justify-center group"
             >
               {isLoading ? (
                 <>
@@ -611,7 +611,7 @@ const Signup = ({ userRole = "user" }) => {
             <button
               type="button"
               disabled={isLoading}
-              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {/* Google SVG icon */}
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -637,7 +637,7 @@ const Signup = ({ userRole = "user" }) => {
             <button
               type="button"
               disabled={isLoading}
-              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex items-center justify-center px-4 cursor-pointer py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {/* Facebook SVG icon */}
               <svg className="w-5 h-5 mr-2" fill="#1877F2" viewBox="0 0 24 24">
@@ -656,7 +656,7 @@ const Signup = ({ userRole = "user" }) => {
               <button
                 type="button"
                 onClick={navigateToLogin}
-                className="text-orange-500 hover:text-orange-600 font-medium transition-colors duration-200 underline"
+                className="text-orange-500 cursor-pointer hover:text-orange-600 font-medium transition-colors duration-200 underline"
                 disabled={isLoading}
               >
                 Sign in here

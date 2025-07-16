@@ -68,21 +68,21 @@ const Navbar = () => {
             {isLoggedIn ? (
               <button
                 onClick={navigateToDashboard}
-                className="w-10 h-10 rounded-full border-2 border-orange-500 hover:bg-orange-100 flex items-center justify-center transition"
+                className="w-10 h-10 rounded-full border-2 border-orange-500 hover:bg-orange-100 cursor-pointer flex items-center justify-center transition"
               >
-                <UserCircle className="w-6 h-6 text-orange-600" />
+                <UserCircle className="w-6 h-6 text-orange-500" />
               </button>
             ) : (
               <>
                 <button
                   onClick={navigateToLogin}
-                  className="text-gray-700 hover:text-gray-900 px-4 py-2 text-sm font-medium"
+                  className="text-gray-700 hover:text-gray-900 cursor-pointer px-4 py-2 text-sm font-medium"
                 >
                   Login
                 </button>
                 <button
                   onClick={navigateToSignup}
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow-sm"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg cursor-pointer text-sm font-medium shadow-sm"
                 >
                   Sign Up
                 </button>
@@ -121,7 +121,7 @@ const Navbar = () => {
               key={path}
               href={path}
               onClick={closeMenu}
-              className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
+              className={`block cursor-pointer px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
                 isActiveLink(path)
                   ? "text-orange-500"
                   : "text-gray-700 hover:text-gray-900 hover:bg-gray-50"
@@ -138,7 +138,7 @@ const Navbar = () => {
                   navigateToDashboard();
                   closeMenu();
                 }}
-                className="w-full flex items-center gap-2 text-orange-600 hover:bg-orange-50 px-3 py-2 rounded-md text-base font-medium transition"
+                className="w-full flex items-center gap-2 text-orange-500 cursor-pointer hover:bg-orange-50 px-3 py-2 rounded-md text-base font-medium transition"
               >
                 <UserCircle className="w-5 h-5" />
                 Dashboard
@@ -150,7 +150,7 @@ const Navbar = () => {
                     navigateToLogin();
                     closeMenu();
                   }}
-                  className="w-full text-left text-gray-700 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
+                  className="w-full text-left text-gray-700 cursor-pointer hover:text-gray-900 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium"
                 >
                   Login
                 </button>
@@ -159,7 +159,7 @@ const Navbar = () => {
                     navigateToSignup();
                     closeMenu();
                   }}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg text-base font-medium transition"
+                  className="w-full bg-orange-500 hover:bg-orange-600 cursor-pointer text-white px-3 py-2 rounded-lg text-base font-medium transition"
                 >
                   Sign Up
                 </button>

@@ -118,14 +118,14 @@ const VehicleManagement = () => {
         prev.map((v) =>
           v.id === editingId
             ? {
-                ...v,
-                ...form,
-                rating: parseFloat(form.rating),
-                price: parseFloat(form.price),
-                doors: parseInt(form.doors),
-                seats: parseInt(form.seats),
-                image: imageOptions[form.image],
-              }
+              ...v,
+              ...form,
+              rating: parseFloat(form.rating),
+              price: parseFloat(form.price),
+              doors: parseInt(form.doors),
+              seats: parseInt(form.seats),
+              image: imageOptions[form.image],
+            }
             : v
         )
       );
@@ -180,12 +180,14 @@ const VehicleManagement = () => {
     );
   };
 
+  // ...imports and state unchanged
+
   return (
-    <div className="min-h-screen p-6 max-w-5xl mx-auto bg-gray-50">
-      <h2 className="text-2xl sm:text-3xl mb-6">Vehicle Management</h2>
+    <div className="min-h-screen p-4 sm:p-6 max-w-5xl mx-auto bg-gray-50">
+      <h2 className="text-2xl sm:text-3xl mb-6 text-center sm:text-left">Vehicle Management</h2>
 
       {/* Form for Add/Edit */}
-      <div className="bg-white p-6 rounded shadow mb-10">
+      <div className="bg-white p-4 sm:p-6 rounded shadow mb-10">
         <h3 className="text-xl mb-4 flex items-center gap-2">
           {editingId ? (
             <>
@@ -198,8 +200,7 @@ const VehicleManagement = () => {
           )}
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* ...inputs unchanged */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <input
             type="text"
             name="name"
@@ -208,11 +209,77 @@ const VehicleManagement = () => {
             onChange={handleChange}
             className="input-field"
           />
-          {/* rest inputs... */}
-          {/* The rest of your input fields here remain the same */}
+          <input
+            type="text"
+            name="category"
+            placeholder="Category (e.g. SUV)"
+            value={form.category}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="text"
+            name="transmission"
+            placeholder="Transmission (Auto/Manual)"
+            value={form.transmission}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="text"
+            name="fuelType"
+            placeholder="Fuel Type"
+            value={form.fuelType}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="number"
+            name="rating"
+            placeholder="Rating"
+            value={form.rating}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={form.price}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="number"
+            name="doors"
+            placeholder="Number of Doors"
+            value={form.doors}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <input
+            type="number"
+            name="seats"
+            placeholder="Seats"
+            value={form.seats}
+            onChange={handleChange}
+            className="input-field"
+          />
+          <select
+            name="image"
+            value={form.image}
+            onChange={handleChange}
+            className="input-field"
+          >
+            {Object.keys(imageOptions).map((key) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
         </div>
 
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <button
             onClick={handleSave}
             className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded"
@@ -235,15 +302,15 @@ const VehicleManagement = () => {
         {vehicles.map((vehicle) => (
           <div
             key={vehicle.id}
-            className="bg-white p-4 rounded-lg shadow flex items-center gap-6"
+            className="bg-white p-4 rounded-lg shadow flex flex-col sm:flex-row sm:items-center sm:gap-6"
           >
             <img
               src={vehicle.image}
               alt={vehicle.name}
-              className="w-28 h-16 object-cover rounded"
+              className="w-full sm:w-28 h-32 sm:h-16 object-cover rounded mb-3 sm:mb-0"
             />
             <div className="flex-1">
-              <h4 className="text-lg font-semibold">{vehicle.name}</h4>
+              <h4 className="text-lg">{vehicle.name}</h4>
               <p className="text-sm text-gray-600">
                 {vehicle.category} • {vehicle.transmission} • {vehicle.fuelType}
               </p>
@@ -251,9 +318,9 @@ const VehicleManagement = () => {
                 Rating: {vehicle.rating} • Doors: {vehicle.doors} • Seats:{" "}
                 {vehicle.seats}
               </p>
-              <p className="text-sm font-semibold">₦{vehicle.price}</p>
+              <p className="text-sm mt-1">₦{vehicle.price}</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 mt-3 sm:mt-0 sm:ml-4 justify-end">
               <button
                 onClick={() => handleEdit(vehicle)}
                 className="text-orange-500 hover:text-orange-700"
@@ -273,7 +340,8 @@ const VehicleManagement = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
+
 
 export default VehicleManagement;

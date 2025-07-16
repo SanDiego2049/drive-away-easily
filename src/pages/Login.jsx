@@ -182,7 +182,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600"
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
@@ -216,7 +216,7 @@ const Login = () => {
               <button
                 onClick={navigateToForgotPassword}
                 type="button"
-                className="text-orange-500 hover:text-orange-600 focus:outline-none focus:underline"
+                className="text-orange-500 hover:text-orange-600 cursor-pointer focus:outline-none focus:underline"
               >
                 Forgot password?
               </button>
@@ -225,7 +225,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg flex items-center justify-center gap-2 text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed`}
+              className={`w-full bg-orange-500 hover:bg-orange-600 cursor-pointer text-white py-3 rounded-lg flex items-center justify-center gap-2 text-base transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed`}
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -256,7 +256,7 @@ const Login = () => {
             <button
               type="button"
               disabled={isLoading}
-              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
               aria-label="Continue with Google"
             >
               <svg
@@ -288,7 +288,7 @@ const Login = () => {
             <button
               type="button"
               disabled={isLoading}
-              className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
               aria-label="Continue with Facebook"
             >
               <svg
@@ -309,7 +309,7 @@ const Login = () => {
               Don't have an account?{" "}
               <button
                 onClick={navigateToSignup}
-                className="text-orange-500 hover:text-orange-600 font-medium underline"
+                className="text-orange-500 hover:text-orange-600 cursor-pointer font-medium underline"
               >
                 Sign up now
               </button>

@@ -126,7 +126,7 @@ const Booking = () => {
             <ArrowLeft className="h-5 w-5 mr-2" />
             Back to vehicles
           </button>
-          <h1 className="text-2xl sm:text-3xl text-gray-900 font-semibold">
+          <h1 className="text-2xl sm:text-3xl text-gray-900">
             Book This Vehicle
           </h1>
         </div>
@@ -145,7 +145,7 @@ const Booking = () => {
                 />
               </div>
               <div className="p-6">
-                <h2 className="text-xl sm:text-2xl text-gray-900 mb-2 font-semibold">
+                <h2 className="text-xl sm:text-2xl text-gray-900 mb-2">
                   {selectedVehicle.name}
                 </h2>
                 <div className="flex items-center mb-4">
@@ -156,7 +156,7 @@ const Booking = () => {
                     {selectedVehicle.rating}
                   </span>
                 </div>
-                <div className="text-2xl sm:text-3xl text-gray-900 mb-6 font-bold">
+                <div className="text-2xl sm:text-3xl text-gray-900 mb-6">
                   ₦{selectedVehicle.price.toLocaleString()}
                   <span className="text-sm text-gray-600 font-normal ml-1">
                     /day
@@ -164,9 +164,7 @@ const Booking = () => {
                 </div>
 
                 <div className="space-y-4 text-sm sm:text-base">
-                  <h3 className="text-lg text-gray-900 font-semibold mb-2">
-                    Specifications
-                  </h3>
+                  <h3 className="text-lg text-gray-900 mb-2">Specifications</h3>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <span className="text-gray-500">Engine</span>
@@ -203,7 +201,7 @@ const Booking = () => {
               <form className="space-y-6">
                 {/* Dates */}
                 <div>
-                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center font-semibold">
+                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center">
                     <Calendar className="h-5 w-5 mr-2 text-orange-500" />
                     Rental Details
                   </h3>
@@ -241,7 +239,7 @@ const Booking = () => {
 
                 {/* Locations */}
                 <div>
-                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center font-semibold">
+                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center">
                     <MapPin className="h-5 w-5 mr-2 text-orange-500" />
                     Location Details
                   </h3>
@@ -279,7 +277,7 @@ const Booking = () => {
 
                 {/* Customer Info */}
                 <div>
-                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center font-semibold">
+                  <h3 className="text-lg sm:text-xl text-gray-900 mb-4 flex items-center">
                     <User className="h-5 w-5 mr-2 text-orange-500" />
                     Customer Info
                   </h3>
@@ -338,7 +336,7 @@ const Booking = () => {
                       {days} day{days !== 1 ? "s" : ""}
                     </span>
                   </div>
-                  <div className="border-t pt-2 mt-2 text-lg flex justify-between font-semibold">
+                  <div className="border-t pt-2 mt-2 text-lg flex justify-between">
                     <span>Total:</span>
                     <span className="text-orange-600">
                       ₦{totalPrice.toLocaleString()}
@@ -350,7 +348,7 @@ const Booking = () => {
                 <button
                   type="button"
                   onClick={handleProceedToPayment}
-                  className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md text-lg font-semibold"
+                  className="w-full mt-6 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md text-lg"
                 >
                   Proceed to Payment
                 </button>

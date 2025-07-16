@@ -162,7 +162,7 @@ const AllCarsDisplay = () => {
               {/* Mobile Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="lg:hidden flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                className="lg:hidden cursor-pointer flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 <Filter className="h-4 w-4" />
                 Filters
@@ -174,7 +174,7 @@ const AllCarsDisplay = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none cursor-pointer focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 >
                   <option value="All">All Categories</option>
                   <option value="Sedan">Sedan</option>
@@ -187,7 +187,7 @@ const AllCarsDisplay = () => {
                 <select
                   value={selectedTransmission}
                   onChange={(e) => setSelectedTransmission(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                  className="px-4 cursor-pointer py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 >
                   <option value="All">All Transmissions</option>
                   <option value="Auto">Automatic</option>
@@ -200,7 +200,7 @@ const AllCarsDisplay = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none px-4 py-2 pr-8 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 bg-white"
+                  className="appearance-none px-4 py-2 pr-8 border border-gray-300 rounded-md focus:outline-none cursor-pointer focus:ring-1 focus:ring-orange-500 focus:border-orange-500 bg-white"
                 >
                   <option value="name">Sort by Name</option>
                   <option value="price-low">Price: Low to High</option>
@@ -219,7 +219,7 @@ const AllCarsDisplay = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                  className="px-3 py-2 border border-gray-300 cursor-pointer rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 >
                   <option value="All">All Categories</option>
                   <option value="Sedan">Sedan</option>
@@ -231,7 +231,7 @@ const AllCarsDisplay = () => {
                 <select
                   value={selectedTransmission}
                   onChange={(e) => setSelectedTransmission(e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+                  className="px-3 py-2 border border-gray-300 cursor-pointer rounded-md focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
                 >
                   <option value="All">All Transmissions</option>
                   <option value="Auto">Automatic</option>
@@ -302,7 +302,7 @@ const AllCarsDisplay = () => {
                   </div>
                   <button
                     onClick={() => handleBookNow(vehicle.id)}
-                    className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="w-full sm:w-auto bg-orange-500 cursor-pointer hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                   >
                     Book Now
                   </button>
@@ -327,17 +327,6 @@ const AllCarsDisplay = () => {
           </div>
         )}
       </div>
-
-      {/* Debug Section - Remove in production */}
-      {/* <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white p-3 rounded-md text-sm">
-        <div>Login Status: {isLoggedIn ? "Logged In" : "Not Logged In"}</div>
-        <button
-          onClick={() => setIsLoggedIn(!isLoggedIn)}
-          className="mt-2 bg-orange-500 hover:bg-orange-600 px-3 py-1 rounded text-xs"
-        >
-          Toggle Login
-        </button>
-      </div> */}
 
       <SmallerFooter />
     </div>
