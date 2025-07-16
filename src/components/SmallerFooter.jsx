@@ -27,9 +27,7 @@ const SmallerFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-white mb-4">
-              Drive Away Easily
-            </h3>
+            <h3 className="text-xl text-white mb-4">Ryde&trade;</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Your trusted partner for car rentals across Nigeria.
             </p>
@@ -37,9 +35,7 @@ const SmallerFooter = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">
-              Quick Links
-            </h4>
+            <h4 className="text-lg text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -56,7 +52,7 @@ const SmallerFooter = () => {
 
           {/* Support */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Support</h4>
+            <h4 className="text-lg text-white mb-4">Support</h4>
             <ul className="space-y-3">
               <li className="flex items-center text-gray-300 text-sm">
                 <Phone className="w-4 h-4 mr-2 text-orange-400" />
@@ -75,9 +71,7 @@ const SmallerFooter = () => {
 
           {/* Stay Connected */}
           <div className="overflow-x-hidden lg:col-span-1">
-            <h4 className="text-lg font-semibold text-white mb-4">
-              Stay Connected
-            </h4>
+            <h4 className="text-lg text-white mb-4">Stay Connected</h4>
             <div className="flex space-x-3 mb-4">
               {socialLinks.map((social, index) => (
                 <a
@@ -108,7 +102,7 @@ const SmallerFooter = () => {
       <div className="border-t border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <p className="text-center text-gray-400 text-sm">
-            © {new Date().getFullYear()} Drive Away Easily. All rights reserved.
+            © {new Date().getFullYear()} Ryde&trade;. All rights reserved.
           </p>
         </div>
       </div>

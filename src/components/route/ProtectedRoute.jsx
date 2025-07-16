@@ -1,7 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
-const ProtectedRoute = ({ children, requireKyc = false }) => {
+const ProtectedRoute = ({
+  children,
+  requireKyc = false,
+  allowedRoles = [],
+}) => {
   const { user, loading } = useUser();
   const location = useLocation();
 
@@ -13,12 +17,30 @@ const ProtectedRoute = ({ children, requireKyc = false }) => {
     );
   }
 
+  // Redirect unauthenticated users
   if (!user) {
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+    const isAdminPath = location.pathname.startsWith("/admin");
+    return (
+      <Navigate
+        to={isAdminPath ? "/admin/login" : "/login"}
+        state={{ from: location.pathname }}
+        replace
+      />
+    );
   }
 
-  if (requireKyc && !user.hasCompletedKyc) {
-    return <Navigate to="/dashboard/kyc" replace />;
+  // Disallow role access if not in allowedRoles
+  if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
+    return user.role === "admin" ? (
+      <Navigate to="/admin/dashboard" replace />
+    ) : (
+      <Navigate to="/dashboard" replace />
+    );
+  }
+
+  // Enforce KYC if required
+  if (requireKyc && user.role === "user" && !user.hasCompletedKyc) {
+    return <Navigate to="/dashboard/profile" replace />;
   }
 
   return children;

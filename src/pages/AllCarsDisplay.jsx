@@ -129,7 +129,7 @@ const AllCarsDisplay = () => {
         <div className="absolute inset-0 bg-black/40"></div>
         <Navbar />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-          <h1 className="text-4xl font-bold mb-4">Our Vehicle Fleet</h1>
+          <h1 className="text-4xl mb-4">Our Vehicle Fleet</h1>
           <p className="text-xl text-center max-w-2xl px-4">
             Choose from our wide selection of premium vehicles for your journey
           </p>
@@ -269,9 +269,7 @@ const AllCarsDisplay = () => {
               {/* Vehicle Details */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {vehicle.name}
-                  </h3>
+                  <h3 className="text-lg text-gray-900">{vehicle.name}</h3>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(
                       vehicle.category
@@ -295,16 +293,16 @@ const AllCarsDisplay = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <span className="text-2xl font-bold text-gray-900">
+                    <span className="text-2xl text-gray-900">
                       ₦{vehicle.price.toLocaleString()}
                     </span>
                     <span className="text-sm text-gray-600">/day</span>
                   </div>
                   <button
                     onClick={() => handleBookNow(vehicle.id)}
-                    className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                    className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                   >
                     Book Now
                   </button>

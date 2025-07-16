@@ -9,6 +9,7 @@ import {
   PointElement,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,7 +19,8 @@ ChartJS.register(
   LinearScale,
   PointElement,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const DashboardChart = ({ title, labels, dataPoints, type = "line" }) => {
@@ -47,13 +49,15 @@ const DashboardChart = ({ title, labels, dataPoints, type = "line" }) => {
   };
 
   return (
-    <div className="bg-white p-5 rounded-lg shadow h-72">
-      <h2 className="text-lg font-semibold mb-4">{title}</h2>
-      {type === "bar" ? (
-        <Bar data={data} options={options} />
-      ) : (
-        <Line data={data} options={options} />
-      )}
+    <div className="bg-white p-5 rounded-lg shadow h-100">
+      <h2 className="text-lg mb-4">{title}</h2>
+      <div className="h-80">
+        {type === "bar" ? (
+          <Bar data={data} options={options} />
+        ) : (
+          <Line data={data} options={options} />
+        )}
+      </div>
     </div>
   );
 };

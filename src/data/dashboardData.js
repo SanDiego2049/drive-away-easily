@@ -6,8 +6,8 @@ export const adminDashboardData = {
     dataPoints: [30, 70], // percentage or counts
   },
   vehiclePopularity: {
-    labels: ["Sedan", "SUV", "Pickup", "Van", "Coupe"],
-    dataPoints: [120, 200, 150, 80, 50], // bookings count
+    labels: ["Sedan", "SUV", "Bus", "Luxury"],
+    dataPoints: [120, 200, 150, 80], // bookings count
   },
   monthlyBookingTrends: {
     labels: [
@@ -27,12 +27,12 @@ export const adminDashboardData = {
     dataPoints: [45, 60, 55, 70, 80, 65, 90, 100, 85, 70, 60, 50],
   },
   bookingDistributionByVehicleType: {
-    labels: ["Sedan", "SUV", "Pickup", "Van", "Coupe"],
-    dataPoints: [25, 35, 20, 10, 10], // percentage or count split
+    labels: ["Sedan", "SUV", "Bus", "Luxury"],
+    dataPoints: [25, 35, 20, 10], // percentage or count split
   },
 };
 
-export const customerDashboardData = {
+export const userDashboardData = {
   vehiclesRentedPerMonth: {
     labels: [
       "Jan",
@@ -72,7 +72,7 @@ export const customerDashboardData = {
     dataPoints: [20, 3, 5], // counts
   },
   rentedVehicleTypes: {
-    labels: ["Sedan", "SUV", "Pickup", "Van", "Coupe"],
-    dataPoints: [8, 10, 5, 2, 3],
+    labels: ["Sedan", "SUV", "Bus", "Luxury"],
+    dataPoints: [8, 10, 5, 2],
   },
 };

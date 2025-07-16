@@ -36,12 +36,14 @@ const PieDoughnutChart = ({ title, labels, dataPoints, type = "pie" }) => {
 
   return (
     <div className="bg-white p-5 rounded-lg shadow h-72">
-      <h2 className="text-lg font-semibold mb-4">{title}</h2>
-      {type === "doughnut" ? (
-        <Doughnut data={data} options={options} />
-      ) : (
-        <Pie data={data} options={options} />
-      )}
+      <h2 className="text-lg mb-4">{title}</h2>
+      <div className="h-50">
+        {type === "doughnut" ? (
+          <Doughnut data={data} options={options} />
+        ) : (
+          <Pie data={data} options={options} />
+        )}
+      </div>
     </div>
   );
 };

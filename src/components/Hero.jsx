@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import Navbar from "./Navbar";
 import backgroundImage from "../assets/backgroundImage.jpg";
 
@@ -12,66 +14,32 @@ const HeroSection = () => {
 
   const vehicleTypes = ["Sedan", "SUV", "Luxury", "Bus"];
 
-  const handleSearch = async () => {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
     if (!selectedVehicle || !startDate || !endDate) {
-      alert("Please fill in all fields before searching");
+      toast.error("Please fill in all fields before searching");
       return;
     }
 
     setLoading(true);
 
-    try {
-      // Fetch rental details for vehicle
-      // We'll try to match vehicle by name to an ID or send a simple GET /rentals/1 for demo
-      // In real, you'd map vehicle type to rental id or search
+    // No API call, just navigate after a small delay to simulate loading
+    toast.success(
+      `Searching for ${selectedVehicle} from ${startDate} to ${endDate}`
+    );
 
-      // For example purpose, let's assume:
-      // Sedan -> id 1, SUV -> id 2, Luxury -> id 3, Bus -> id 4
-      const vehicleIdMap = {
-        Sedan: 1,
-        SUV: 2,
-        Luxury: 3,
-        Bus: 4,
-      };
-
-      const vehicleId = vehicleIdMap[selectedVehicle];
-
-      if (!vehicleId) {
-        alert("Selected vehicle not found");
-        setLoading(false);
-        return;
-      }
-
-      const response = await fetch(
-        `https://roadsphere.vercel.app/api/rentals/${vehicleId}`,
-        {
-          headers: {
-            accept: "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch vehicle details");
-      }
-
-      const data = await response.json();
-
-      // You can handle the data as needed
-      console.log("Vehicle details:", data);
-
-      alert(
-        `Searching for ${selectedVehicle} from ${startDate} to ${endDate}.\n\nVehicle Details:\n${JSON.stringify(
-          data,
-          null,
-          2
-        )}`
-      );
-    } catch (error) {
-      alert(error.message || "An error occurred during search");
-    } finally {
+    setTimeout(() => {
       setLoading(false);
-    }
+      navigate("/cars", {
+        state: {
+          selectedVehicle,
+          startDate,
+          endDate,
+          // No vehicleDetails anymore
+        },
+      });
+    }, 1000);
   };
 
   return (
@@ -87,7 +55,7 @@ const HeroSection = () => {
 
         <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight">
               Rent Smarter, Travel Freer
             </h1>
 

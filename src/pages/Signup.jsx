@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Eye,
   EyeOff,
@@ -12,11 +12,12 @@ import {
   Shield,
   CheckCircle,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Signup = ({ userRole = "customer" }) => {
+const Signup = ({ userRole = "user" }) => {
   const [currentStep, setCurrentStep] = useState("form");
   const [showPassword, setShowPassword] = useState(false);
+  const [userRoleState, setUserRole] = useState(userRole || "user");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -24,6 +25,8 @@ const Signup = ({ userRole = "customer" }) => {
   const [otpTimer, setOtpTimer] = useState(0);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const otpInputRef = useRef(null);
 
   useEffect(() => {
     let timer;
@@ -43,10 +46,30 @@ const Signup = ({ userRole = "customer" }) => {
 
   useEffect(() => {
     if (currentStep === "success") {
-      const timeout = setTimeout(() => navigate("/login"), 3000);
+      const timeout = setTimeout(() => {
+        const role = localStorage.getItem("userRole");
+        if (role === "admin") {
+          navigate("/admin/login");
+        } else {
+          navigate("/login");
+        }
+      }, 3000);
       return () => clearTimeout(timeout);
     }
   }, [currentStep, navigate]);
+
+  useEffect(() => {
+    if (!userRoleState) {
+      if (location.pathname.startsWith("/admin")) setUserRole("admin");
+      else setUserRole("user");
+    }
+  }, [location.pathname, userRoleState]);
+
+  useEffect(() => {
+    if (currentStep === "otp" && otpInputRef.current) {
+      otpInputRef.current.focus();
+    }
+  }, [currentStep]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -88,17 +111,16 @@ const Signup = ({ userRole = "customer" }) => {
     return true;
   };
 
-  const roleToSend = ["admin", "customer"].includes(userRole)
-    ? userRole
-    : "customer";
-  
+  const roleToSend = ["admin", "user"].includes(userRoleState)
+    ? userRoleState
+    : "user";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
     setError("");
-
 
     try {
       const response = await fetch(
@@ -122,6 +144,7 @@ const Signup = ({ userRole = "customer" }) => {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("userRole", roleToSend); // "admin" or "customer"
         setRegisteredEmail(formData.email.trim());
         setCurrentStep("otp");
         setOtpTimer(600);
@@ -138,9 +161,12 @@ const Signup = ({ userRole = "customer" }) => {
   };
 
   const navigateToLogin = () => {
-    navigate(userRole === "admin" ? "/admin/login" : "/login");
+    if (location.pathname.startsWith("/admin")) {
+      navigate("/admin/login");
+    } else {
+      navigate("/login");
+    }
   };
-
 
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
@@ -226,20 +252,19 @@ const Signup = ({ userRole = "customer" }) => {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
         <div className="backdrop-blur-sm shadow-lg bg-white/90 max-w-md w-full rounded-lg p-8 text-center">
           <div className="mb-6">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-blue-600" />
+            <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-8 h-8 text-orange-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Verify Email
-            </h2>
-            <p className="text-gray-700 text-base leading-relaxed">
+            <h2 className="text-2xl text-gray-900 mb-2">Verify Email</h2>
+            <p className="text-gray-700 text-base leading-relaxed px-2 sm:px-0">
               Enter the 6-digit OTP sent to{" "}
-              <span className="font-medium">{registeredEmail}</span>
+              <span className="font-medium break-words">{registeredEmail}</span>
             </p>
           </div>
 
-          <form onSubmit={handleOtpSubmit} className="space-y-4">
+          <form onSubmit={handleOtpSubmit} className="space-y-4 px-2 sm:px-0">
             <input
+              ref={otpInputRef}
               type="text"
               maxLength="6"
               value={otp}
@@ -277,7 +302,7 @@ const Signup = ({ userRole = "customer" }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold flex justify-center items-center gap-2"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg flex justify-center items-center gap-2"
             >
               {isLoading ? (
                 <>
@@ -300,10 +325,8 @@ const Signup = ({ userRole = "customer" }) => {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
-            Email Verified!
-          </h2>
-          <p className="text-gray-700 text-base leading-relaxed mb-6">
+          <h2 className="text-2xl text-gray-900 mb-3">Email Verified!</h2>
+          <p className="text-gray-700 text-base leading-relaxed mb-6 px-2 sm:px-0">
             Your account has been successfully created and verified.
           </p>
           <p className="text-sm text-gray-500">Redirecting to login page...</p>
@@ -317,12 +340,12 @@ const Signup = ({ userRole = "customer" }) => {
       <div className="w-full max-w-md mx-auto">
         <div className="bg-white rounded-2xl shadow-2xl p-8 backdrop-blur-sm w-full">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 px-2 sm:px-0">
             <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Create {userRole === "admin" ? "Admin" : "Customer"} Account
+            <h1 className="text-3xl text-gray-900 mb-2">
+              Create {userRoleState === "admin" ? "Admin" : "Customer"} Account
             </h1>
             <p className="text-gray-600">
               {userRole === "admin"
@@ -340,9 +363,9 @@ const Signup = ({ userRole = "customer" }) => {
           )}
 
           {/* Form */}
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label
                   htmlFor="firstName"
@@ -462,6 +485,7 @@ const Signup = ({ userRole = "customer" }) => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
                   disabled={isLoading}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -500,6 +524,11 @@ const Signup = ({ userRole = "customer" }) => {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
                   disabled={isLoading}
+                  aria-label={
+                    showConfirmPassword
+                      ? "Hide confirm password"
+                      : "Show confirm password"
+                  }
                 >
                   {showConfirmPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -545,10 +574,9 @@ const Signup = ({ userRole = "customer" }) => {
 
             {/* Submit Button */}
             <button
-              onClick={handleSubmit}
               type="submit"
               disabled={isLoading}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed flex items-center justify-center group"
+              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-300 text-white py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:transform-none disabled:cursor-not-allowed flex items-center justify-center group"
             >
               {isLoading ? (
                 <>
@@ -579,12 +607,13 @@ const Signup = ({ userRole = "customer" }) => {
           </div>
 
           {/* Social Login */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               type="button"
               disabled={isLoading}
               className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
             >
+              {/* Google SVG icon */}
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -610,6 +639,7 @@ const Signup = ({ userRole = "customer" }) => {
               disabled={isLoading}
               className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors duration-200"
             >
+              {/* Facebook SVG icon */}
               <svg className="w-5 h-5 mr-2" fill="#1877F2" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
@@ -620,7 +650,7 @@ const Signup = ({ userRole = "customer" }) => {
           </div>
 
           {/* Login Link */}
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-center px-2 sm:px-0">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
               <button

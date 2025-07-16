@@ -32,7 +32,7 @@ export default function Reviews() {
     <section className="py-16 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl text-gray-900 mb-4">
             What Our Customers Say
           </h2>
         </div>
@@ -44,11 +44,11 @@ export default function Reviews() {
               className="bg-gray-50 rounded-lg p-6 shadow-sm"
             >
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-semibold text-sm mr-3">
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
                   {review.initials}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">{review.name}</h3>
+                  <h3 className="text-gray-900">{review.name}</h3>
                   <div className="flex items-center">
                     {[...Array(review.rating)].map((_, index) => (
                       <Star

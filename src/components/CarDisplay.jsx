@@ -52,9 +52,7 @@ const CarsDisplay = () => {
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Our Fleet
-          </h2>
+          <h2 className="text-3xl sm:text-4xl text-gray-900 mb-4">Our Fleet</h2>
         </div>
 
         {/* Cards Grid */}
@@ -76,9 +74,7 @@ const CarsDisplay = () => {
               {/* Card Content */}
               <div className="p-6">
                 {/* Vehicle Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {vehicle.title}
-                </h3>
+                <h3 className="text-xl text-gray-900 mb-2">{vehicle.title}</h3>
 
                 {/* Vehicle Description */}
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">
@@ -87,7 +83,7 @@ const CarsDisplay = () => {
 
                 {/* Price */}
                 <div className="mb-4">
-                  <span className="text-lg font-bold text-orange-500">
+                  <span className="text-lg text-orange-500">
                     {vehicle.price}
                   </span>
                 </div>

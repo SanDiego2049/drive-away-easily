@@ -105,15 +105,16 @@ const AboutUs = () => {
       <section className="relative bg-gradient-to-r from-orange-500 to-orange-600 text-white pb-20">
         <Navbar />
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl  mt-20 mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            About Drive Away Easily
+        <div className="relative max-w-7xl mt-20 mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6">
+            About Ryde&trade;
           </h1>
           <p className="text-lg sm:text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
             We're passionate about making car ownership accessible, affordable,
             and enjoyable for everyone.
           </p>
-          <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3">
+          <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mx-auto max-w-max">
+            {/* Added mx-auto and max-w-max so it centers nicely */}
             <Car className="w-6 h-6" />
             <span className="font-medium">
               Your trusted automotive partner since 2025
@@ -125,15 +126,15 @@ const AboutUs = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {/* changed grid-cols-2 → grid-cols-1 on xs */}
             {stats.map((stat, index) => (
               <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4 group-hover:bg-orange-200 transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4 group-hover:bg-orange-200 transition-colors duration-300 mx-auto">
+                  {/* mx-auto centers the icon container */}
                   <stat.icon className="w-8 h-8 text-orange-600" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
-                  {stat.number}
-                </div>
+                <div className="text-3xl text-gray-900 mb-2">{stat.number}</div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </div>
             ))}
@@ -144,16 +145,17 @@ const AboutUs = () => {
       {/* Story Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* added grid-cols-1 for mobile */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-3xl md:text-4xl text-gray-900 mb-6">
                 Our Story
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Founded in 2025, Drive Away Easily started with a simple
-                mission: to revolutionize how people rent cars. We noticed that
-                car shopping was often stressful, time-consuming, and filled
-                with uncertainty.
+                Founded in 2025, Ryde&trade; started with a simple mission: to
+                revolutionize how people rent cars. We noticed that car shopping
+                was often stressful, time-consuming, and filled with
+                uncertainty.
               </p>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 Our founders, passionate automotive enthusiasts, decided to
@@ -166,11 +168,12 @@ const AboutUs = () => {
                 perfect vehicle every year.
               </p>
             </div>
-            <div className="relative">
+            <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-auto">
+              {/* fixed height for responsiveness */}
               <img
                 src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1426&q=80"
                 alt="Car dealership"
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-xl object-cover w-full h-full"
               />
             </div>
           </div>
@@ -181,7 +184,7 @@ const AboutUs = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl text-gray-900 mb-4">
               Our Values
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -189,18 +192,17 @@ const AboutUs = () => {
               our customers every day.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* added grid-cols-1 for xs */}
             {values.map((value, index) => (
               <div
                 key={index}
                 className="text-center group hover:bg-gray-50 p-6 rounded-lg transition-colors duration-300"
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4 group-hover:bg-orange-200 transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4 group-hover:bg-orange-200 transition-colors duration-300 mx-auto">
                   <value.icon className="w-8 h-8 text-orange-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {value.title}
-                </h3>
+                <h3 className="text-xl text-gray-900 mb-3">{value.title}</h3>
                 <p className="text-gray-600 leading-relaxed">
                   {value.description}
                 </p>
@@ -214,7 +216,7 @@ const AboutUs = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl text-gray-900 mb-4">
               Meet Our Team
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -222,7 +224,8 @@ const AboutUs = () => {
               the perfect vehicle.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* grid-cols-1 fallback */}
             {team.map((member, index) => (
               <div
                 key={index}
@@ -234,9 +237,7 @@ const AboutUs = () => {
                   className="w-full h-64 object-cover"
                 />
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {member.name}
-                  </h3>
+                  <h3 className="text-xl text-gray-900 mb-2">{member.name}</h3>
                   <p className="text-orange-600 font-medium mb-3">
                     {member.role}
                   </p>
@@ -253,23 +254,22 @@ const AboutUs = () => {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Drive Away Easily?
-          </h2>
+          <h2 className="text-3xl md:text-4xl mb-6">Ready to Ryde?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Discover our amazing selection of vehicles and experience the
             difference of working with a trusted partner.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-4 sm:px-0">
+            {/* added px-4 padding on xs */}
             <button
               onClick={navigateToProducts}
-              className="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
+              className="bg-white text-orange-600 px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 w-full sm:w-auto"
             >
               View Our Inventory
             </button>
             <button
               onClick={navigateToContactUs}
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-200"
+              className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-orange-600 transition-colors duration-200 w-full sm:w-auto"
             >
               Contact Us Today
             </button>

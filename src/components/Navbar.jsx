@@ -39,9 +39,7 @@ const Navbar = () => {
       <div className="backdrop-blur-sm shadow-sm bg-white/80 w-full max-w-full sm:max-w-7xl sm:rounded-lg mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <h1 className="text-lg sm:text-xl font-bold text-gray-900">
-              Drive Away Easily
-            </h1>
+            <h1 className="text-lg sm:text-xl text-gray-900">Ryde&trade;</h1>
           </div>
 
           {/* Desktop Nav */}

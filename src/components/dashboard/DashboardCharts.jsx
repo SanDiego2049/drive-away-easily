@@ -3,7 +3,7 @@ import DashboardChart from "./DashboardChart";
 import PieDoughnutChart from "./PieDoughnutChart";
 import {
   adminDashboardData,
-  customerDashboardData,
+  userDashboardData,
 } from "../../data/dashboardData";
 
 const DashboardCharts = ({ role }) => {
@@ -17,12 +17,6 @@ const DashboardCharts = ({ role }) => {
 
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <PieDoughnutChart
-          title="KYC Completion Status"
-          labels={kycStatus.labels}
-          dataPoints={kycStatus.dataPoints}
-          type="pie"
-        />
         <DashboardChart
           title="Vehicle Popularity"
           labels={vehiclePopularity.labels}
@@ -36,6 +30,12 @@ const DashboardCharts = ({ role }) => {
           type="line"
         />
         <PieDoughnutChart
+          title="KYC Completion Status"
+          labels={kycStatus.labels}
+          dataPoints={kycStatus.dataPoints}
+          type="pie"
+        />
+        <PieDoughnutChart
           title="Booking Distribution by Vehicle Type"
           labels={bookingDistributionByVehicleType.labels}
           dataPoints={bookingDistributionByVehicleType.dataPoints}
@@ -45,13 +45,13 @@ const DashboardCharts = ({ role }) => {
     );
   }
 
-  if (role === "customer") {
+  if (role === "user") {
     const {
       vehiclesRentedPerMonth,
       monthlySpending,
       bookingStatus,
       rentedVehicleTypes,
-    } = customerDashboardData;
+    } = userDashboardData;
 
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

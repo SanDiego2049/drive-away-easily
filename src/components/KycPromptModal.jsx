@@ -19,7 +19,7 @@ const KycPromptModal = ({ show, onClose }) => {
   return (
     <div className="fixed inset-0 z-100 bg-black/40 backdrop-blur-md flex items-center justify-center px-4">
       <div className="bg-white p-6 rounded-xl shadow-lg max-w-md w-full text-center">
-        <h2 className="text-xl font-semibold mb-4">Complete Your KYC</h2>
+        <h2 className="text-xl mb-4">Complete Your KYC</h2>
         <p className="text-gray-600 mb-6">
           To continue using your account, please verify your identity.
         </p>
@@ -27,7 +27,7 @@ const KycPromptModal = ({ show, onClose }) => {
           <button
             onClick={() => {
               onClose();
-              navigate("/dashboard/kyc");
+              navigate("/dashboard/profile");
             }}
             className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
           >

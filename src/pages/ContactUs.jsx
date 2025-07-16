@@ -40,13 +40,13 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100 py-8 px-4 sm:py-12 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-10 sm:mb-12">
           <button
             onClick={navigateToHome}
-            className="inline-flex items-center text-orange-500 hover:text-orange-600 transition-colors duration-200 mb-6 group"
+            className="inline-flex items-center text-orange-500 hover:text-orange-600 transition-colors duration-200 mb-6 group text-sm sm:text-base"
           >
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
             Back to Home
@@ -56,10 +56,10 @@ const ContactUs = () => {
             <Mail className="w-10 h-10 text-white" />
           </div>
 
-          <h1 className="text-center text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-center text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Get in Touch
           </h1>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto">
+          <p className="text-center text-gray-600 max-w-xl mx-auto text-sm sm:text-base px-2">
             We'd love to hear from you. Send us a message and we'll respond as
             soon as possible.
           </p>
@@ -67,8 +67,8 @@ const ContactUs = () => {
 
         {/* Contact Form */}
         <div className="max-w-2xl mx-auto mb-12">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+          <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 backdrop-blur-sm">
+            <h2 className="text-2xl sm:text-3xl text-gray-900 mb-6 text-center ">
               Send us a Message
             </h2>
 
@@ -199,7 +199,7 @@ const ContactUs = () => {
               {/* Submit Button */}
               <button
                 onClick={handleSubmit}
-                className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center group"
+                className="w-full cursor-pointer bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center group"
               >
                 <span className="mr-2">Send Message</span>
                 <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
@@ -210,60 +210,58 @@ const ContactUs = () => {
       </div>
 
       {/* Contact Information */}
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 backdrop-blur-sm">
+          <h2 className="text-2xl sm:text-3xl text-gray-900 mb-6 text-center ">
             Contact Information
           </h2>
 
           <div className="space-y-6">
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
                 <Mail className="w-6 h-6 text-orange-500" />
               </div>
-              <div className="flex-shrink-0">
-                <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                <span className="flex flex-col sm:flex-row gap-2">
-                  <p className="text-gray-600">support@company.com,</p>
-                  <p className="text-gray-600">info@company.com</p>
+              <div>
+                <h3 className=" text-gray-900 mb-1">Email</h3>
+                <span className="flex flex-col sm:flex-row gap-2 text-gray-600 text-sm sm:text-base">
+                  <p>support@company.com,</p>
+                  <p>info@company.com</p>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
                 <Phone className="w-6 h-6 text-orange-500" />
               </div>
-              <div className="flex-shrink-0">
-                <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                <span className="flex flex-col sm:flex-row gap-2">
-                  <p className="text-gray-600">+1 (555) 123-4567,</p>
-                  <p className="text-gray-600">+1 (555) 987-6543</p>
+              <div>
+                <h3 className=" text-gray-900 mb-1">Phone</h3>
+                <span className="flex flex-col sm:flex-row gap-2 text-gray-600 text-sm sm:text-base">
+                  <p>+1 (555) 123-4567,</p>
+                  <p>+1 (555) 987-6543</p>
                 </span>
               </div>
             </div>
 
-            <div className="flex items-start">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-0 sm:mr-4 mb-3 sm:mb-0 flex-shrink-0">
                 <MapPin className="w-6 h-6 text-orange-500" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-1">Office</h3>
-                <span className="flex text-wrap">
-                  <p className="text-gray-600">
-                    123 Business Street, Suite 100,City, State 12345
-                  </p>
+                <h3 className=" text-gray-900 mb-1">Office</h3>
+                <span className="text-gray-600 text-sm sm:text-base">
+                  123 Business Street, Suite 100, City, State 12345
                 </span>
               </div>
             </div>
           </div>
 
           {/* Business Hours */}
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-4 text-center">
+          <div className="mt-8 pt-8 border-t border-gray-200 text-center sm:text-left">
+            <h3 className=" text-gray-900 mb-4 text-lg sm:text-xl">
               Business Hours
             </h3>
-            <div className="space-y-2 text-sm text-gray-600">
+            <div className="space-y-2 text-sm sm:text-base text-gray-600 max-w-xs sm:max-w-full mx-auto sm:mx-0">
               <div className="flex justify-between">
                 <span className="flex-shrink-0">Monday - Friday</span>
                 <span className="flex-shrink-0">9:00 AM - 6:00 PM</span>
@@ -282,8 +280,8 @@ const ContactUs = () => {
       </div>
 
       {/* Additional Info */}
-      <div className="mt-12 text-center">
-        <p className="text-sm text-gray-500">
+      <div className="mt-12 text-center px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <p className="text-sm sm:text-base text-gray-500">
           Need immediate assistance? Call us at{" "}
           <a
             href="tel:+15551234567"

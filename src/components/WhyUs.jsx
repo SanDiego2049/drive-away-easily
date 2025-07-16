@@ -33,7 +33,7 @@ export default function WhyUs() {
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl text-gray-900 mb-4">
             Why Choose Us?
           </h2>
         </div>
@@ -46,9 +46,7 @@ export default function WhyUs() {
                   <feature.icon className="w-8 h-8 text-orange-500" />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {feature.title}
-              </h3>
+              <h3 className="text-lg text-gray-900 mb-2">{feature.title}</h3>
               <p className="text-gray-600 text-sm">{feature.description}</p>
             </div>
           ))}
